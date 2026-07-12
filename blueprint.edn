@@ -1,0 +1,11 @@
+[{:itonami.blueprint/id "cloud-itonami-isco-2421"
+  :itonami.blueprint/name "Community Management Analysis"
+  :itonami.blueprint/isco-08 "2421"
+  :itonami.blueprint/domain :business/management-analysis
+  :itonami.blueprint/license "AGPL-3.0-or-later"
+  :itonami.blueprint/social-impact [:small-business-support :operational-transparency :local-jobs]
+  :itonami.blueprint/governor :management-analysis-governor
+  :itonami.blueprint/robotics true
+  :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
+  :itonami.blueprint/status :public-oss
+  :db/id -1}]
