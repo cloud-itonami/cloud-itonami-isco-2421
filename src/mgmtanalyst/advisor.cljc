@@ -24,7 +24,12 @@
    :claimed-savings-pct claimed-savings-pct
    :stake (or stake :low)
    :confidence (case (or stake :low) :high 0.7 :medium 0.85 :low 0.95)
-   :rationale (str "proposed " (name op) " for client " (:client-id request))})
+   ;; `pr-str`, not `name`: a request naming no op at all, or naming one as a
+   ;; string, used to throw here — the advisor crashed before the governor
+   ;; could refuse it, so the actor's most basic vocabulary refusal was
+   ;; unreachable through the wired graph. Building a refusable proposal is
+   ;; the advisor's job; deciding it is not.
+   :rationale (str "proposed " (pr-str op) " for client " (pr-str (:client-id request)))})
 
 (defn mock-advisor []
   (reify Advisor

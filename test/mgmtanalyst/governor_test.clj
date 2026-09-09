@@ -46,10 +46,15 @@
       (is (some #(= :savings-claim-exceeds-ceiling (:rule %)) (:violations v))))))
 
 (deftest hard-on-unknown-engagement
+  ;; The rule literal moved from :unknown-engagement to :engagement/unregistered
+  ;; when well-formedness was split into `mgmtanalyst.facts`: an unregistered
+  ;; engagement and one registered without a comparable ceiling are now the
+  ;; same kind of answer ("this engagement cannot be governed") and are named
+  ;; on the same scale. The refusal itself is unchanged.
   (let [st (fresh-store)
         v (governor/check req {} (assoc (rec #{"opex"} 10) :engagement-id "E-ghost") st)]
     (is (:hard? v))
-    (is (some #(= :unknown-engagement (:rule %)) (:violations v)))))
+    (is (some #(= :engagement/unregistered (:rule %)) (:violations v)))))
 
 (deftest hard-on-foreign-engagement
   (let [st (fresh-store)]
@@ -59,10 +64,15 @@
       (is (some #(= :engagement-wrong-client (:rule %)) (:violations v))))))
 
 (deftest hard-on-unregistered-client
+  ;; :no-client -> :client/unregistered. The old name described the store's
+  ;; return value; the new one names the provenance fact that failed, which is
+  ;; the distinction `mgmtanalyst.facts/client-defect` exists to draw — an
+  ;; empty map registered under the key nil is a record the store returned and
+  ;; is still not provenance.
   (let [st (fresh-store)
         v (governor/check {:client-id "nobody"} {} (rec #{"opex"} 10) st)]
     (is (:hard? v))
-    (is (some #(= :no-client (:rule %)) (:violations v)))))
+    (is (some #(= :client/unregistered (:rule %)) (:violations v)))))
 
 (deftest hard-on-no-actuation-violation
   (let [st (fresh-store)
