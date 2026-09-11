@@ -68,9 +68,9 @@ an external anchor, and `verify` says so rather than claiming otherwise.
 ## Operator quickstart
 
 ```bash
-clojure -M:test                  # 51 tests / 320 assertions
-clojure -M -m mgmtanalyst.sim    # 26 scenarios; exits non-zero on 0 refusals
-clojure -M:lint                  # clj-kondo, errors fail
+kbb -M:test                  # 51 tests / 320 assertions
+kbb -M -m mgmtanalyst.sim    # 26 scenarios; exits non-zero on 0 refusals
+kbb -M:lint                  # clj-kondo, errors fail
 ```
 
 `mgmtanalyst.sim` runs the table through the **wired graph**, not the
