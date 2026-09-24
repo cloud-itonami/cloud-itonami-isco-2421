@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; ISCO 2421, management and organization analysts. The README calls this
+;; pure-cognitive work with no robotics gate; blueprint.edn nevertheless
+;; declares :itonami.blueprint/robotics true. The physical work declared here
+;; is the handling the occupation itself entails (ASSUMPTION, not stated in the
+;; README): wheeling the facilitation kit (flip charts, whiteboards, projector)
+;; to the client's workshop room, and lifting the projector case onto the table.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2421"
+ :cases
+ [{:id :workshop-kit-cart
+   :kind :transport
+   :procedure "AMR tows the facilitation-kit cart (flip-chart stands, mobile whiteboard, sticky-note stock) to the client's workshop room"
+   :params {:mass-kg 50.0 :distance-m 60.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 0.6 :drive-force-n 70.0 :crr 0.025
+            :cog-height-m 0.90 :support-half-length-m 0.30}
+   :sweep {:param :payload-kg :values [10.0 30.0 60.0 90.0 120.0]}
+   :quantity :cycle-time-s
+   :limit {:max 90.0 :basis "estimate: the kit must be in the room within 90 s so setup fits the 15-minute pre-workshop window with several trips"}
+   :boundary {:lo 5.0 :hi 200.0}}
+  {:id :projector-case-onto-table
+   :kind :manipulator
+   :procedure "arm lifts the projector / facilitation case from the cart deck onto the workshop table"
+   :params {:l1-m 0.45 :l2-m 0.40 :m1-kg 3.5 :m2-kg 2.5
+            :from [0.55 -0.30] :to [0.50 0.20] :duration-s 2.0 :steps 500}
+   :sweep {:param :payload-kg :values [1.0 3.0 5.0 7.0 9.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 60.0 :basis "estimate: continuous shoulder torque of a light collaborative arm (~5 kg class)"}
+   :boundary {:lo 0.5 :hi 30.0}}]}
