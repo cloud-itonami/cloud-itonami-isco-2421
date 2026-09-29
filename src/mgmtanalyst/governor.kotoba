@@ -2,7 +2,7 @@
   "ManagementOrganizationAnalystsGovernor — the independent safety/
   traceability layer for the ISCO-08 2421 community management &
   organization analysts actor (itonami actor pattern, ADR-2607011000 /
-  CLAUDE.md Actors section). Consulting twist: a recommendation's cited
+  AGENTS.md Actors section). Consulting twist: a recommendation's cited
   metrics must all be members of the registered baseline-metrics set (no
   fabricated evidence), and a claimed savings percentage is arithmetic
   comparison against the registered ceiling — an aggressive savings pitch is

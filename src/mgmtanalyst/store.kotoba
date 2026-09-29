@@ -1,6 +1,6 @@
 (ns mgmtanalyst.store
   "SSoT for the ISCO-08 2421 community management & organization
-  analysts actor (itonami actor pattern, ADR-2607011000 / CLAUDE.md
+  analysts actor (itonami actor pattern, ADR-2607011000 / AGENTS.md
   Actors section). Modeled on cloud-itonami-isco-4311's
   bookkeeping.store.
 
